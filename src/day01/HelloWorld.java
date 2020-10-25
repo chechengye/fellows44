@@ -111,7 +111,7 @@ public class HelloWorld {
 
 
 
-        
+
         int n = 20;
         //n = s;//短的向长的自动转换/赋值
         s = (short) n; // 有可能损失精度，强制类型转换，长的向短的赋值
