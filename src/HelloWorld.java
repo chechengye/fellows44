@@ -35,6 +35,8 @@ public class HelloWorld {
         System.out.println(age);
         System.out.println(max);
 
+        System.out.println("...");
+
     }
 
     /**
