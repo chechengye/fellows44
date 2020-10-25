@@ -109,6 +109,9 @@ public class HelloWorld {
         short s = 100;
         boolean b = false; // boolean类型不允许与其它数据类型进行转换
 
+
+
+        
         int n = 20;
         //n = s;//短的向长的自动转换/赋值
         s = (short) n; // 有可能损失精度，强制类型转换，长的向短的赋值
