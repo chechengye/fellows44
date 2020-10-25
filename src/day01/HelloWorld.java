@@ -1,5 +1,6 @@
 package day01;
 
+
 import org.junit.Test;
 
 /**
@@ -110,14 +111,75 @@ public class HelloWorld {
         boolean b = false; // boolean类型不允许与其它数据类型进行转换
 
 
-
-
         int n = 20;
         //n = s;//短的向长的自动转换/赋值
         s = (short) n; // 有可能损失精度，强制类型转换，长的向短的赋值
 
-        System.out.println("f = "+ f + ", d = " + d  + " , c = " + c + " ,i = " + i);
-        System.out.println("----------------------");
+        System.out.print("f = "+ f + ", d = " + d  + " , c = " + c + " ,i = " + i);
+        System.out.print("----------------------");
         System.out.println(s);
+
+        System.out.println("aaaa\nbbbb");
+        System.out.println("aaa\rbbbb");
+        System.out.println("---------------------");
+        System.out.println("aaa\tbbbb");
+        //  \代表转义的意思
+        System.out.println("aaa\\bbb");
+
+        System.out.println("aaa\'bbb");
+
+    }
+
+    /**
+     * 表达式
+     *  ++  : 前 ++ 先自增1 再判断表达式/做其它操作
+     *        后 ++ 先判断表达式 。 再自增1
+     *  --  :
+     */
+    @Test
+    public void testFn3(){
+        int n = 10;
+        n++; // n = n+1; n+=1;
+
+        if(++n > 10){
+            System.out.println("n = " + n);
+        }
+        System.out.println(n);
+        System.out.println("-------------------------");
+        int m = 13;
+        m  = m/5;
+        System.out.println(m);
+        System.out.println("-------------赋值运算符-------------");
+        int a = 1;
+        a+=3;// a = a+3;
+        System.out.println(a);
+
+        if(a != 4){ // boolean值
+            System.out.println("a等于4");
+        }
+    }
+
+    /**
+     * &&: 短路与 ，前面的表达式为false，后面的表达式将不会执行
+     *
+     * &:  与 ， 前端的表达式不管是什么。后面都会执行
+     */
+    @Test
+    public void testFn5(){
+        int m = 20;
+        int n = 14;
+        m+=6;
+        n-=3;
+        if(++m > 13 && n < 10){
+            System.out.println(n % m);
+        }else{
+            System.out.println(m / n );
+        }
+
+        if(++m> 27 || --n < 11){
+            System.out.println(m * n);
+        }else{
+            System.out.println(n + m);
+        }
     }
 }
