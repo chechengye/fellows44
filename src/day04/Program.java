@@ -31,4 +31,56 @@ public class Program {
         System.out.println(Arrays.toString(arr1));
 
     }
+
+    /**
+     * 1、new 关键字表示创建一个对象
+     * 2、new 关键字表示实例化对象
+     * 3、new 关键字表示申请内存空间
+     */
+    @Test
+    public void testFn1(){
+        Dog teddy = new Dog();//实例化完成一个对象，dog
+        teddy.name = "泰迪"; //实例化后的对象可以调用此类的非私有的属性和方法
+        teddy.month = 3;
+        teddy.eat();
+        Dog husky = null;//此时没有在堆中开辟内存空间，所以无法调用类中的属性与方法
+        //husky.eat();   //异常会终端代码块继续执行
+        //new Dog().eat();//匿名调用
+        System.out.println("-----------------");
+        Dog ss = new Dog();
+        ss.name = "松狮";
+        ss.month = 2;
+        ss.eat();
+
+        ss = null;//好处：让GC会立即回收此内存空间，让出内存。也可以不处理，这样GC会自动回收，（时间片轮询）
+        ss = teddy; // 对象之间的赋值 , 赋值引用
+        ss.name = "松狮2号";
+        System.out.println(teddy.name);
+        System.out.println("-------------------");
+        method(teddy);
+        System.out.println(teddy.name);
+        Cat cat = new Cat();
+        //cat = teddy;//相同的类型才可以赋值
+
+    }
+
+    public void method(Dog dog){//引用传递
+        dog.name = "测试";
+    }
 }
+
+/**
+ * 自定义Dog的类，编写属性与方法
+ */
+class Dog{
+    int month;
+    String name;
+    private String color;
+    void eat(){
+        System.out.println(month + "个月大的" + name + "在吃东西...");
+    }
+}
+class Cat{
+
+}
+

@@ -10,6 +10,7 @@ import java.util.Random;
  */
 public class Example04 {
 
+    private final int BLUE_BOUND = 16;
     @Test
     public void testFn(){
         String[] ballPool = getBallPool();
@@ -20,7 +21,7 @@ public class Example04 {
         System.out.println("---------------------------");
         //用户抽取红球与篮球
         String[] userRedBalls = getRedBalls(ballPool);
-        String userBlueBall = ballPool[r.nextInt(16)];
+        String userBlueBall = ballPool[r.nextInt(BLUE_BOUND)];
         System.out.println("用户随机抽取号码为： " + Arrays.toString(userRedBalls) + userBlueBall);
         System.out.println("--------------------");
         System.out.println("开奖结果： " + isReward(sysRedBalls , sysBlueBall , userRedBalls , userBlueBall));
