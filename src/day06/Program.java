@@ -1,5 +1,7 @@
 package day06;
 
+import org.junit.Test;
+
 public class Program {
     public static void main(String[] args) {
         //Animal a = new Animal();
@@ -15,6 +17,41 @@ public class Program {
         //dog.name = "旺财";
         dog.eat();
 
+    }
+
+    /**
+     * final测试
+     */
+    @Test
+    public void testFn(){
+        FinalDemo fd = new FinalDemo();
+        fd.method();
+        Final2 f2 = new Final2();
+        f2.move();
+    }
+
+    /**
+     * 测试抽象类
+     */
+    @Test
+    public void testFn1(){
+        AbsPerson mp = new ManPerson();//多态的一种体现 ，自动向上转型
+        mp.sex = "男";
+        mp.eat();
+        AbsPerson wp = new WomenPerson();
+        wp.eat();
+        /*AbsPerson ad = new AbsDemo(){
+
+        };*/
+    }
+
+    /**
+     * 测试接口
+     */
+    @Test
+    public void testFn2(){
+        Bird bird = new Bird();
+        bird.fly();
     }
 }
 class Animal{
@@ -85,3 +122,139 @@ class Dog extends Animal{
 
     }
 }
+
+/**
+ * final关键字讲解
+ * 1、final可以修饰属性、成员变量/局部变量   -- 称为常量
+ * 2、final修饰一个方法，不能被子类重写，只能调用
+ * 3、final修饰一个类不能被继承，断子绝孙类
+ */
+class FinalDemo{
+    final int PERSON_NUM = 10;
+
+    public void method(){
+        final int i = 20;
+        System.out.println(Constants.MSG.SUCCESS_MSG);
+        move();
+    }
+
+    public final void move(){
+        System.out.println("移动...");
+    }
+}
+class Final2 extends FinalDemo{
+    /*public final void move(){
+
+    }*/
+}
+final class Constants{
+
+    public static final int CONTENT_SIZE = 100;
+    interface MSG{
+        String SUCCESS_MSG = "添加成功";
+    }
+    interface URL{
+        String URL = "http://wx.openapi.xxxx";
+    }
+}
+/**
+ * 抽象类讲解
+ * 1、带抽象方法的类，一定要定义为抽象类
+ * 2、抽象类中，可以不定义抽象方法。（意义不大）
+ * 3、抽象方法一定要有出口
+ * 4、抽象类中所有抽象方法，子类必须全部实现
+ * 5、抽象类继承抽象类可以不实现其内部的抽象方法
+ * 6、抽象类不能被实例化
+ * 7、抽象类可以有构造方法
+ */
+abstract class AbsPerson{
+
+    protected String username;
+    protected String sex;
+
+    public void move(){
+
+    }
+    public abstract void eat();//抽象方法，可以不写方法体
+
+    public abstract void say();
+}
+
+abstract class AbsDemo extends AbsPerson implements ISay{
+    public AbsDemo(){
+        System.out.println("抽象类构造方法");
+    }
+    public abstract void demo();
+}
+
+/*class Demo extends AbsDemo{ 出口需要实现所有继承的抽象类、和接口中的抽象方法
+
+}*/
+/**
+ * 选中 alt + enter
+ */
+class ManPerson extends AbsPerson{
+    //@Override 可以不写，写了限制必须是重写父类的方法
+    //@Override
+    public void eat() {
+        System.out.println(super.sex + "人喜欢吃肉...");
+    }
+
+    @Override
+    public void say() {
+
+    }
+}
+class WomenPerson extends AbsPerson{
+    @Override
+    public void eat() {
+        System.out.println("女人喜欢吃蔬菜...");
+    }
+
+    @Override
+    public void say() {
+
+    }
+}
+
+/**
+ * 修饰一个接口使用interface
+ * 1、接口中的所有方法都是由 public abstract修饰的 (JDK 1.8之前)
+ * 2、接口中的属性默认都是public static final修饰的
+ * 3、接口支持多实现
+ * 4、接口之间是可以多继承
+ * 5、抽象类实现接口可以不重写抽象方法
+ */
+interface IFly{
+    //public static final int COUNT = 20;
+    void fly();
+
+    /*default void eat(){ //不常用  jdk 1.8之后加入
+    }*/
+}
+interface IEat{
+    void eat();
+}
+
+interface ISay extends IFly ,IEat{}
+
+class Bird implements ISay{
+
+    @Override
+    public void fly() {
+        System.out.println("鸟儿飞行很慢...");
+    }
+
+    @Override
+    public void eat() {
+        System.out.println("鸟儿喜欢吃虫子");
+    }
+}
+class Plane implements IFly{
+
+    @Override
+    public void fly() {
+        System.out.println("飞机飞行很快...");
+    }
+}
+
