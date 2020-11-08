@@ -53,6 +53,69 @@ public class Program {
         Bird bird = new Bird();
         bird.fly();
     }
+
+    /**
+     * 内部类测试
+     */
+    @Test
+    public void testFn3(){
+        Outer o = new Outer();
+        Outer.Inner inner = o.new Inner();
+        inner.eat();
+        System.out.println("---------------------");
+        o.method();
+        System.out.println("---------------------");
+        o.print();
+        System.out.println("---------------------");
+        Outer.Inner1 inner1 = new Outer.Inner1();
+        inner1.eat();
+        Outer.move();
+        System.out.println("----------------------");
+        o.print2();
+        System.out.println("---------------------");
+        o.print3();
+        System.out.println("---------------------");
+        o.print4("dss", new Inner5() {
+            @Override
+            public void name() {
+                System.out.println("我是参数式匿名内部类");
+            }
+        }, new Inner6() {
+            @Override
+            public void drink() {
+                System.out.println("喝什么...");
+            }
+        });
+    }
+
+    /**
+     * 多态测试
+     */
+    @Test
+    public void testFn4(){
+        A a1 = new A();
+        A a2 = new B(); // 多态自动向上转型
+        B b = new B();
+        C c = new C();
+        D d = new D();
+        a1.show(b);
+        System.out.println("-------------------------------");
+        a1.show(c);
+        System.out.println("-------------------------------");
+        a1.show(d);
+        System.out.println("-------------------------------");
+        a2.show(b);
+        System.out.println("-------------------------------");
+        a2.show(c);
+        System.out.println("-------------------------------");
+        a2.show(d);
+        System.out.println("-------------------------------");
+        b.show(b);
+        System.out.println("-------------------------------");
+        b.show(c);
+        System.out.println("-------------------------------");
+        b.show(d);
+    }
 }
 class Animal{
     protected String name;
@@ -258,3 +321,119 @@ class Plane implements IFly{
     }
 }
 
+/**
+ * 内部类
+ * 1、成员内部类
+ * 2、方法内部类
+ * 3、静态内部类
+ * 4、匿名内部类
+ *    （1）继承式匿名内部类 （2）接口式的匿名内部类 （3）参数式的匿名内部类（重要）
+ */
+class Outer{
+    /**
+     * 成员内部类
+     */
+    class Inner{
+        public void eat(){
+            System.out.println("成员内部类");
+        }
+    }
+
+    static class Inner1{
+        public void eat(){
+            System.out.println("静态内部类");
+        }
+    }
+
+    public static void move(){
+        System.out.println("移动...");
+    }
+    /**
+     * 方法内部类
+     * 1、方法内部类中引用的变量，会默认改成常量 jdk 1.8之后 可以不显示的使用final修饰
+     */
+    public void print(){
+        int i = 10;
+        class Inner2{
+            int a = 20;
+            public void eat(){
+                System.out.println("方法式内部类"  + a + i);
+            }
+        }
+        //i++;  修改之后，编译期认为不是常量了，所以方法内部类中就不可以引用了
+        Inner2 inner2 = new Inner2();
+        inner2.eat();
+    }
+
+    public void method(){
+        Inner inner = new Inner();
+        inner.eat();
+    }
+
+    public void print2(){
+        int a = 20;
+        new Inner4(){
+            @Override
+            void eat() {
+                int i = 30;
+                System.out.println("继承式的匿名内部类" + a);
+            }
+        }.eat();
+        //inner4.eat();
+
+    }
+    public void print3(){
+        new Inner5(){
+            @Override
+            public void name() {
+                System.out.println("接口式匿名内部类");
+            }
+        }.name();
+    }
+
+    public void print4(String name , Inner5 inner5 , Inner6 inner6){
+        inner5.name();
+        inner6.drink();
+    }
+}
+abstract class Inner4{
+    abstract void eat();
+}
+
+interface Inner5{
+    void name();
+}
+interface Inner6{
+    void drink();
+}
+
+/**
+ * 多重继承
+ * 1、多态应用实例
+ * (1)this.show(O)
+ * (2)super.show(O)
+ * (3)this.show(super..O)
+ * (4)super.show(super..0)
+ */
+class A {
+    public void show(D d){
+        System.out.println("A AND D");
+    }
+    public void show(A a){
+        System.out.println("A AND A");
+    }
+
+    public void show(C c){
+        System.out.println("A AND C");
+    }
+}
+class B extends A{
+    public void show(B b){
+        System.out.println("B AND B");
+    }
+    public void show(A a){
+        System.out.println("B AND A");
+    }
+}
+class C extends B { }
+class D extends B{}
