@@ -11,11 +11,18 @@ public class Example03 {
         ChickenManage cm = new ChickenManage();
         cm.add(new Chicken("咕咕鸡",2 , "白色" , 1));//号码牌唯一标识它
         cm.add(new Chicken("正常鸡",3 , "黑色" , 2));
-        cm.add(new Chicken("正常鸡",3 , "黑色" , 2));
-        cm.add(new Chicken("正常鸡",3 , "黑色" , 2));
-        cm.add(new Chicken("正常鸡",3 , "黑色" , 2));
-        cm.add(new Chicken("正常鸡",3 , "黑色" , 6));
-        cm.add(new Chicken("正常鸡",3 , "黑色" , 7));
+        cm.add(new Chicken("小黄鸡",1 , "黑色" , 3));
+        cm.add(new Chicken("小黄鸡",1 , "黑色" , 4));
+        cm.add(new Chicken("小黄鸡",1 , "黑色" , 5));
+        cm.add(new Chicken("小黄鸡",1 , "黑色" , 6));
+        cm.printAll();
+        System.out.println("--------------------------");
+        System.out.println(cm.getChickenByNo(3));
+        System.out.println("--------------------------");
+        cm.updateChicken(new Chicken("尖叫鸡", 6 , "红色", 2));
+        cm.printAll();
+        System.out.println("------------------------");
+        cm.deleteChickenByNo(2);
         cm.printAll();
     }
 
@@ -33,12 +40,63 @@ class ChickenManage{
     }
 
     /**
+     * 根据编号获取一只鸡
+     * @param no
+     * @return
+     */
+    public Chicken getChickenByNo(int no){
+        //1、根据no找寻这只鸡，从哪？cks
+        for(Chicken c : cks){
+            if(no == c.getNo())
+                return c;
+        }
+        return null;
+    }
+
+    /**
+     * 修改一只鸡
+     * @param c
+     */
+    public void updateChicken(Chicken c){
+        for(Chicken ck : cks){
+            if(null != ck){
+                if(ck.getNo() == c.getNo()){//找到了想要修改的这只鸡
+                    //ck = c;
+                    ck.setColor(c.getColor());
+                    ck.setMonth(c.getMonth());
+                    ck.setName(c.getName());
+                }
+            }
+        }
+        /*for(int i = 0 ; i < count ; i++){
+            if(cks[i].getNo() == c.getNo()){
+                cks[i] = c;
+            }
+        }*/
+    }
+
+    /**
+     * 删除一只鸡
+     */
+    public void deleteChickenByNo(int no){
+        for(int i = 0 ; i < count ; i++){
+            if(no == cks[i].getNo()){
+                //cks[i] = null;
+                for(int j = i + 1 ; j < count ; j++){
+                    cks[j - 1] = cks[j];
+                }
+            }
+        }
+        cks[--count] = null;
+    }
+
+    /**
      * 打印所有鸡舍中的小鸡
      */
     public void printAll(){
         for(Chicken c : cks){
-            if(null != c)
-                System.out.println(c);
+            System.out.println(c);
+
         }
     }
 }
