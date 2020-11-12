@@ -2,6 +2,7 @@ package day07;
 
 /**
  * 链表底层实现
+ * LinkedList
  */
 public class Example01 {
 
@@ -19,19 +20,21 @@ public class Example01 {
         else System.out.println("不存在");
         System.out.println("-------------------");
         //传入：data  index
-        nm.insert(77 , 1);
+        //nm.insert(77 , 1);
         nm.show();
         System.out.println("-------------------");
-        nm.delete(7);
+        //nm.delete(7);
         nm.show();
         System.out.println("-------------------");
         //更新操作
+        nm.update(0 , 88);
+        nm.show();
     }
 }
 class NodeManger{
 
     private Node root;
-    private int currentIndex;
+    private int currentIndex;//成员变量默认值为0
 
     /**
      * 添加方法
@@ -97,6 +100,21 @@ class NodeManger{
         }
     }
 
+    /**
+     * 根据索引更新一个值
+     * @param index
+     * @param data
+     */
+    public void update(int index, int data) {
+        if(0 == index){
+            if(null != this.root){
+                this.root.setData(data);
+            }
+        }else{
+            this.root.updateNode(index , data);
+        }
+    }
+
 
     class Node{
         private int data;
@@ -150,6 +168,19 @@ class NodeManger{
                 else this.next.deleteNode(data);
             }
         }
+
+        public void updateNode(int index, int data) {
+            currentIndex++;
+            if(null != this.next) {
+                if(currentIndex == index){
+                    this.next.setData(data);
+                }else{
+                    this.next.updateNode(index , data);
+                }
+            }
+
+        }
+
         public int getData() {
             return data;
         }
@@ -172,6 +203,7 @@ class NodeManger{
                 this.next.showNode();
             }
         }
+
 
 
     }
