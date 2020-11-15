@@ -1,5 +1,7 @@
 package day09;
 
+import day09.utils.DecimalFormatUtil;
+
 import java.text.DecimalFormat;
 
 /**
@@ -16,6 +18,9 @@ public class DecimalFormatDemo {
         System.out.println(new DecimalFormat("0.0000").format(pi));
         //取六位小数
         System.out.println(new DecimalFormat("0.000000").format(pi));
+
+        System.out.println("---------计算金额保留位数-----------");
+        System.out.println(DecimalFormatUtil.getDecimalForTwo(653.13243));
 
     }
 }
