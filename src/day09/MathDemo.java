@@ -12,6 +12,7 @@ public class MathDemo {
         System.out.println("--------------");
         System.out.println(Math.abs(-0.23));
         System.out.println(Math.random());//double类型的范围 0.0~1.0
+        System.out.println("test merge ....");
         System.out.println("---------------------");
         System.out.println(Math.round(Math.random()*100) * 1.0/ 100);
         System.out.println("--------------------------");
