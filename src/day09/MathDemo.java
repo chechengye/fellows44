@@ -8,6 +8,7 @@ import java.util.Random;
 public class MathDemo {
 
     public static void main(String[] args) {
+
         System.out.println(Math.PI);
         System.out.println("--------------");
         System.out.println(Math.abs(-0.23));
@@ -15,6 +16,8 @@ public class MathDemo {
         System.out.println("test merge ....");
         System.out.println("test merge ....");
         System.out.println("test merge ....");
+        int i = 20;
+        method();
         System.out.println("---------------------");
         System.out.println(Math.round(Math.random()*100) * 1.0/ 100);
         System.out.println("--------------------------");
@@ -23,5 +26,10 @@ public class MathDemo {
         System.out.println(r.nextBoolean());
         System.out.println("--------------------------");
         System.out.println(r.nextInt(100));
+    }
+
+    public static void method(){
+        System.out.println("----------");
+
     }
 }
