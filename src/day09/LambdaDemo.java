@@ -6,7 +6,7 @@ package day09;
 public class LambdaDemo {
 
     public static void main(String[] args) {
-        /*Person person = new Person() {
+        /*Person person = new Person() {//接口式的匿名内部类
 
             @Override
             public void eat() {
@@ -25,7 +25,11 @@ public class LambdaDemo {
          * 7、若是参数由final修饰，要显示的写final的话，参数类型也要写，或者都不写
          * 8、是由局限性的，只允许存在一个抽象方法
          */
-        Person p = name -> 20;
+        int i = 30;
+        Person p = (name) -> {
+
+            return i;
+        };
             //System.out.println(name);;
         System.out.println(p.move("zhangsan"));
         //p.eat("lisi" , 20);
