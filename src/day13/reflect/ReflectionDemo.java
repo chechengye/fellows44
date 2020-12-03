@@ -15,6 +15,7 @@ public class ReflectionDemo {
     public static void main(String[] args) {
         Dog dog = new Dog("球球",2 , "灰色");
         Class dogClass = dog.getClass();
+
         Dog dog1 = new Dog("毛毛",1 , "白色");
         Class dog1Class = dog1.getClass();
         Class dog2Class = Dog.class;
