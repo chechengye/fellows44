@@ -2,10 +2,7 @@ package day13.reflect;
 
 import org.junit.Test;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 
 /**
  * 反射相关讲解
@@ -116,6 +113,25 @@ public class ReflectionDemo {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    /**
+     * 通过Class类反射调用属性
+     */
+    @Test
+    public void testFn3(){
+        Class<Dog> dogClass = Dog.class;
+        //只会获取公有的属性
+        Field[] fields = dogClass.getFields();
+        for(Field f : fields){
+            System.out.println(f.getType().getTypeName() + "-" + f.getName());
+        }
+        System.out.println("--------------------------------");
+        //获取所有属性
+        Field[] declaredFields = dogClass.getDeclaredFields();
+        for(Field f : declaredFields){
+            System.out.println(Modifier.toString(f.getModifiers()) + "-" + f.getType().getTypeName() + "-" + f.getName());
         }
     }
 }
